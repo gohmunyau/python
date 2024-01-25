@@ -26,17 +26,7 @@ podTemplate(containers: [
             sh 'apt install python3 -y'
             sh 'apt install python3-requests -y'
             sh 'apt install python3-psutil -y'
-
-          }
-        
-          stage('Checkout Code') 
-          {
-            sh 'pwd'
-            sh 'ls -la'
-            sh 'git clone https://github.com/gohmunyau/python.git'
-            sh 'ls -la python'
-          }
-
+            
           } 
           stage('Unit Test Check')  
           { 
