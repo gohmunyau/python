@@ -1,5 +1,5 @@
 """
-Module docstring explaining the purpose of the Pythonfile module.
+Module docstring explaining the purpose of the pythonfile module.
 """
 
 import socket
