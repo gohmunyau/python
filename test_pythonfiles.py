@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
-from menu_selection import SystemMonitor
+from pythonfile import SystemMonitor
 
-class TestMenuSelection(unittest.TestCase):
+class testpythonfiles(unittest.TestCase):
     @patch('psutil.disk_usage')
     def test_check_disk_usage(self, mock_disk_usage):
         mock_disk_usage.return_value.percent = 25
