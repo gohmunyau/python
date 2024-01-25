@@ -17,7 +17,7 @@ podTemplate(containers: [
             sh 'pwd' 
             sh 'ls -la' 
             sh 'git clone https://github.com/gohmunyau/python.git' 
-            sh 'ls -la jenkins_python'  
+            sh 'ls -la python'  
           } 
           stage('Installing Packages')  
           { 
