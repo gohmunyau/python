@@ -21,6 +21,7 @@ podTemplate(containers: [
           } 
           stage('Installing Packages')  
           { 
+            sh 'apt update'
             sh 'apt install pip'
             sh 'apt install python3 -y'
             sh 'apt install python3-requests -y'
