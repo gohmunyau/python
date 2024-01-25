@@ -26,6 +26,7 @@ podTemplate(containers: [
             sh 'apt install python3 -y'
             sh 'apt install python3-requests -y'
             sh 'apt install python3-psutil -y'
+            sh 'apt install pylint'
             
           } 
           stage('Unit Test Check')  
@@ -35,7 +36,7 @@ podTemplate(containers: [
           }
           stage('Static Code Check')  
           { 
-            sh 'python3 python/Pythonfile' 
+            sh 'pylint python/Pythonfile' 
  
           } 
           
