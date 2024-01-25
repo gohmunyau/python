@@ -1,0 +1,88 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Run on Kubernetes') {
+            agent {
+                kubernetes {
+                    defaultContainer 'python'
+                    yaml """
+                    apiVersion: v1
+                    kind: Pod
+                    metadata:
+                      labels:
+                        some-label: some-label-value
+                    spec:
+                      containers:
+                      - name: python
+                        image: 'jenkins/inbound-agent-python:latest'
+                        command:
+                        - cat
+                        tty: true
+                    """
+                }
+            }
+
+            steps {
+                script {
+                    echo 'Running on Kubernetes!'
+                }
+            }
+        }
+
+        stage('Get a Python Project') {
+            steps {
+                container('python') {
+                    script {
+                        sh 'pwd'
+                        sh 'ls -la'
+                        sh 'python -V'
+                        sh 'git clone https://github.com/hanley/jenkins_python.git'
+                        sh 'ls -la jenkins_python'
+                        sh 'python jenkins_python/cal.py'
+                    }
+                }
+            }
+        }
+
+        stage('Installing Packages') {
+            steps {
+                container('python') {
+                    script {
+                        sh 'pwd'
+                        sh 'ls -la'
+                        sh 'python -V'
+                        sh 'git clone https://github.com/hanley/jenkins_python.git'
+                        sh 'ls -la jenkins_python'
+                        sh 'python jenkins_python/cal.py'
+                    }
+                }
+            }
+        }
+
+        stage('Static Code Check') {
+            steps {
+                container('python') {
+                    script {
+                        sh 'pwd'
+                        sh 'ls -la'
+                        sh 'python -V'
+                        sh 'git clone https://github.com/hanley/jenkins_python.git'
+                        sh 'ls -la jenkins_python'
+                        sh 'python jenkins_python/cal.py'
+                    }
+                }
+            }
+        }
+
+        stage('Unit Test Check') {
+            steps {
+                container('python') {
+                    script {
+                        sh 'python3 -m unittest check_os.py'
+                    }
+                }
+            }
+        }
+    }
+}
