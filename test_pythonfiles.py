@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from pythonfile import SystemMonitor  # Update the import statement
+from pythonfile import SystemMonitor
 
 class TestPythonFile(unittest.TestCase):
     @patch('psutil.disk_usage')
