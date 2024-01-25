@@ -3,7 +3,8 @@ podTemplate(containers: [
     name: 'python',  
     image: 'jenkins/inbound-agent-python:latest',  
     command: 'sleep',  
-    args: '30d') 
+    args: '30d'
+  ) 
 ])  
 { 
   node(POD_LABEL)  
@@ -30,15 +31,14 @@ podTemplate(containers: [
           }
           stage('Static Code Check')  
           { 
-            sh 'pylint python/Pythonfile.py'
+            sh 'pylint python/pythonfile.py'
           } 
         
           stage('Unit Test Check')
           { 
-            sh 'python3 -m unittest python/Pythonfile.py'
+            sh 'python3 -m unittest python/pythonfile.py'
           } 
         }
       } 
     } 
-  } 
-
+}
