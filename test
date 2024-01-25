@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                script {
+                    // Use Jenkins credentials for Git clone
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/gohmunyau/python.git']]])
+                }
+            }
+        }
+
+        stage('Installing Packages') {
+            steps {
+                script {
+                    // Create and activate a virtual environment
+                    sh 'python3 -m venv venv'
+                    sh 'source venv/bin/activate && python3 -m pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Unit Test Check') {
+            steps {
+                script {
+                    try {
+                        // Run unit tests
+                        sh 'source venv/bin/activate && python3 -m unittest discover'
+                    } catch (Exception e) {
+                        // Mark the build as unstable and print error message
+                        currentBuild.result = 'UNSTABLE'
+                        echo "Unit tests failed: ${e.message}"
+                        error "Unit tests failed"
+                    }
+                }
+            }
+        }
+
+        stage('Static Code Check') {
+            steps {
+                script {
+                    try {
+                        // Run static code analysis or linting tools
+                        sh 'source venv/bin/activate && python3 lint_script.py'
+                    } catch (Exception e) {
+                        // Mark the build as unstable and print error message
+                        currentBuild.result = 'UNSTABLE'
+                        echo "Static code check failed: ${e.message}"
+                        error "Static code check failed"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'One or more stages failed. Marking the build as FAILURE.'
+            currentBuild.result = 'FAILURE'
+        }
+    }
+}
