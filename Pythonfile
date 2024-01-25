@@ -1,3 +1,7 @@
+"""
+Module docstring explaining the purpose of the Pythonfile module.
+"""
+
 import socket
 import psutil
 import requests
