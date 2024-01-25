@@ -30,12 +30,12 @@ podTemplate(containers: [
           }
           stage('Static Code Check')  
           { 
-            sh 'pylint python/pythonfile.py'
+            sh 'pylint python/test_pythonfile.py'
           } 
         
           stage('Unit Test Check')
           { 
-            sh 'python3 -m unittest test_pythonfile.py'
+            sh 'python3 -m unittest python/test_pythonfile.py'
           } 
         }
       } 
