@@ -22,10 +22,10 @@ podTemplate(containers: [
           stage('Installing Packages')  
           { 
             sh 'apt update'
-            sh 'apt install pip'
-            sh 'apt install python3'
-            sh 'apt install python3-requests'
-            sh 'apt install python3-psutil'
+            sh 'apt install pip -y'
+            sh 'apt install python3 -y'
+            sh 'apt install python3-requests -y'
+            sh 'apt install python3-psutil -y'
 
           } 
           stage('Static Code Check')  
