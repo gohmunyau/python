@@ -1,7 +1,7 @@
 podTemplate(containers: [ 
   containerTemplate( 
     name: 'python',  
-    image: 'jenkins/inbound-agent:4.3-4',  
+    image: 'jenkins/inbound-agent:latest',  
     command: 'sleep',  
     args: '30d') 
 ])  
