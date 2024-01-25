@@ -3,9 +3,10 @@ Module docstring explaining the purpose of the pythonfile module.
 """
 
 import socket
+import unittest
 import psutil
 import requests
-import unittest
+
 from pythonfile import SystemMonitor
 
 class TestSystemMonitor(unittest.TestCase):
