@@ -27,16 +27,19 @@ podTemplate(containers: [
             sh 'apt install python3-requests -y'
             sh 'apt install python3-psutil -y'
 
+            
           } 
+          stage('Unit Test Check')  
+          { 
+            sh 'python3 -m unittest PythonFile.py'
+            
+          }
           stage('Static Code Check')  
           { 
             sh 'python3 PythonFile.py' 
  
           } 
-          stage('Unit Test Check')  
-          { 
-            sh 'python3 -m unittest PythonFile.py'
-          } 
+          
         }
       } 
     } 
