@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch
-from pythonfile import SystemMonitor
+from pythonfile import SystemMonitor  # Update the import statement
 
-class testpythonfiles(unittest.TestCase):
+class TestPythonFile(unittest.TestCase):
     @patch('psutil.disk_usage')
     def test_check_disk_usage(self, mock_disk_usage):
         mock_disk_usage.return_value.percent = 25
         monitor = SystemMonitor()
         self.assertTrue(monitor.check_disk_usage())
-        
+
 if __name__ == '__main__':
     unittest.main()
