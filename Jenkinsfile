@@ -16,7 +16,7 @@ podTemplate(containers: [
           { 
             sh 'pwd' 
             sh 'ls -la' 
-            sh 'python -V' 
+            sh 'python -v' 
             sh 'git clone https://github.com/gohmunyau/python.git' 
             sh 'ls -la jenkins_python'  
           } 
