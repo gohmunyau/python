@@ -29,12 +29,12 @@ podTemplate(containers: [
           } 
           stage('Static Code Check')  
           { 
-            sh 'python3 sys2.py' 
+            sh 'python3 PythonFile.py' 
  
           } 
           stage('Unit Test Check')  
           { 
-            sh 'python3 -m unittest sys2.py'
+            sh 'python3 -m unittest PythonFile.py'
           } 
         }
       } 
