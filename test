@@ -53,8 +53,8 @@ pipeline {
             }
         }
     }
-
-    post {
+    post 
+    {
         failure {
             echo 'One or more stages failed. Marking the build as FAILURE.'
             currentBuild.result = 'FAILURE'
