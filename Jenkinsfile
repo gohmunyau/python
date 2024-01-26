@@ -39,8 +39,6 @@ podTemplate(containers: [
         {
           sh 'pwd'
           sh 'python3 -m unittest Samplefile.py'
-          }
-
           } 
         }
       } 
