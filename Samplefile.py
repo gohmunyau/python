@@ -60,6 +60,19 @@ class TestSystemMonitor(unittest.TestCase):
         self.assertTrue(SystemMonitor.check_internet_availability())
         mock_requests_get.assert_called_once_with("http://www.google.com", timeout=5)
 
+    def main():
+    monitor = SystemMonitor()
+    disk_status = monitor.check_disk_usage()
+    cpu_status = monitor.check_cpu_utilization()
+    localhost_status = monitor.check_localhost_availability()
+    internet_status = monitor.check_internet_availability()
+    if not disk_status or not cpu_status:
+        print("ERROR! Disk usage or CPU utilization exceeded thresholds.")
+    elif localhost_status and internet_status:
+        print("Everything is OK.")
+    else:
+        print("Network checks failed.")
+
 
 if __name__ == '__main__':
     unittest.main()
