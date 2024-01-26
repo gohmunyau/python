@@ -35,10 +35,12 @@ podTemplate(containers: [
             sh 'pylint python/pythonfile.py'
           } 
         
-          stage('Unit Test Check')
-          { 
-            sh 'pwd'
-            sh 'export PYTHONPATH=$PYTHONPATH:/home/jenkins/agent/workspace/Jenkins_python && python3 -m unittest python.test_pythonfiles'
+          stage('Unit Test Check') 
+          {
+          sh 'pwd'
+          sh 'export PYTHONPATH=$PYTHONPATH:/home/jenkins/agent/workspace/Jenkins_python && python3 -m unittest python.test_pythonfiles.test_pythonfiles'
+          }
+
           } 
         }
       } 
