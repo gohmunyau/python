@@ -30,6 +30,7 @@ podTemplate(containers: [
           }
           stage('Static Code Check')  
           { 
+            sh 'pwd'
             sh 'pylint python/pythonfile.py'
           } 
         
