@@ -60,7 +60,7 @@ class TestSystemMonitor(unittest.TestCase):
         self.assertTrue(SystemMonitor.check_internet_availability())
         mock_requests_get.assert_called_once_with("http://www.google.com", timeout=5)
 
-    def main():
+ def main():
     monitor = SystemMonitor()
     disk_status = monitor.check_disk_usage()
     cpu_status = monitor.check_cpu_utilization()
