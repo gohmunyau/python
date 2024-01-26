@@ -1,88 +1,65 @@
-pipeline {
-    agent none
+import unittest
+from unittest.mock import patch
+import psutil
+import requests
 
-    stages {
-        stage('Run on Kubernetes') {
-            agent {
-                kubernetes {
-                    defaultContainer 'python'
-                    yaml """
-                    apiVersion: v1
-                    kind: Pod
-                    metadata:
-                      labels:
-                        some-label: some-label-value
-                    spec:
-                      containers:
-                      - name: python
-                        image: 'jenkins/inbound-agent-python:latest'
-                        command:
-                        - cat
-                        tty: true
-                    """
-                }
-            }
 
-            steps {
-                script {
-                    echo 'Running on Kubernetes!'
-                }
-            }
-        }
+class SystemMonitor:
+    @staticmethod
+    def check_disk_usage():
+        disk_usage = psutil.disk_usage('/')
+        return disk_usage.percent > 20
 
-        stage('Get a Python Project') {
-            steps {
-                container('python') {
-                    script {
-                        sh 'pwd'
-                        sh 'ls -la'
-                        sh 'python -V'
-                        sh 'git clone https://github.com/hanley/jenkins_python.git'
-                        sh 'ls -la jenkins_python'
-                        sh 'python jenkins_python/cal.py'
-                    }
-                }
-            }
-        }
+    @staticmethod
+    def check_cpu_utilization():
+        cpu_utilization = psutil.cpu_percent()
+        return cpu_utilization < 75
 
-        stage('Installing Packages') {
-            steps {
-                container('python') {
-                    script {
-                        sh 'pwd'
-                        sh 'ls -la'
-                        sh 'python -V'
-                        sh 'git clone https://github.com/hanley/jenkins_python.git'
-                        sh 'ls -la jenkins_python'
-                        sh 'python jenkins_python/cal.py'
-                    }
-                }
-            }
-        }
+    @staticmethod
+    def check_localhost_availability():
+        try:
+            socket_info = psutil.net_if_addrs()
+            return 'lo' in socket_info
+        except Exception as e:
+            print(f"Error checking localhost availability: {e}")
+            return False
 
-        stage('Static Code Check') {
-            steps {
-                container('python') {
-                    script {
-                        sh 'pwd'
-                        sh 'ls -la'
-                        sh 'python -V'
-                        sh 'git clone https://github.com/hanley/jenkins_python.git'
-                        sh 'ls -la jenkins_python'
-                        sh 'python jenkins_python/cal.py'
-                    }
-                }
-            }
-        }
+    @staticmethod
+    def check_internet_availability():
+        try:
+            response = requests.get("http://www.google.com", timeout=5)
+            return response.status_code == 200
+        except requests.ConnectionError:
+            return False
 
-        stage('Unit Test Check') {
-            steps {
-                container('python') {
-                    script {
-                        sh 'python3 -m unittest check_os.py'
-                    }
-                }
-            }
-        }
-    }
-}
+
+class TestSystemMonitor(unittest.TestCase):
+    @patch('psutil.disk_usage')
+    def test_check_disk_usage(self, mock_disk_usage):
+        mock_disk_usage.return_value.percent = 25
+        self.assertTrue(SystemMonitor.check_disk_usage())
+        mock_disk_usage.assert_called_once_with('/')
+
+    @patch('psutil.cpu_percent')
+    def test_check_cpu_utilization(self, mock_cpu_percent):
+        mock_cpu_percent.return_value = 70
+        self.assertTrue(SystemMonitor.check_cpu_utilization())
+        mock_cpu_percent.assert_called_once()
+
+    @patch('psutil.net_if_addrs')
+    def test_check_localhost_availability(self, mock_net_if_addrs):
+        mock_net_if_addrs.return_value = {'lo': [1, 2, 3]}
+        self.assertTrue(SystemMonitor.check_localhost_availability())
+        mock_net_if_addrs.assert_called_once()
+
+    @patch('requests.get')
+    def test_check_internet_availability(self, mock_requests_get):
+        response_mock = unittest.mock.Mock()
+        response_mock.status_code = 200
+        mock_requests_get.return_value = response_mock
+        self.assertTrue(SystemMonitor.check_internet_availability())
+        mock_requests_get.assert_called_once_with("http://www.google.com", timeout=5)
+
+
+if __name__ == '__main__':
+    unittest.main()
