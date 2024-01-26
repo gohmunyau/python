@@ -35,8 +35,8 @@ podTemplate(containers: [
             sh 'pylint python/pythonfile.py'
           } 
         
-          stage('Unit Test Check') 
-          {
+          stage('Unit Test Check')
+        {
           sh 'pwd'
           sh 'python3 -m unittest Samplefile.py'
           }
