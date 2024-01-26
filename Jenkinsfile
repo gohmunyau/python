@@ -27,8 +27,6 @@ podTemplate(containers: [
             sh 'apt install python3-requests -y'
             sh 'apt install python3-psutil -y'
             sh 'apt install pylint -y'
-            sh 'git clone https://github.com/gohmunyau/python.git'
-            sh 'ls -la python'
           }
           stage('Static Code Check')  
           { 
@@ -37,6 +35,7 @@ podTemplate(containers: [
         
           stage('Unit Test Check')
           { 
+            sh 'pwd'
             sh 'python3 /python/python.test_pythonfiles.py'
           } 
         }
