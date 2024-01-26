@@ -38,7 +38,7 @@ podTemplate(containers: [
           stage('Unit Test Check')
           { 
             sh 'pwd'
-            sh 'python3 python.test_pythonfiles.py'
+            sh 'python3 python.test_pythonfiles'
           } 
         }
       } 
