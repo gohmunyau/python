@@ -1,0 +1,91 @@
+root@4bf73cc34922:/home/jenkins# history
+    1  apt update
+    2  apt install python -y
+    3  apt install python3 -y
+    4  python -v
+    5  python3.9 -v
+    6  apt install python3 
+    7  python3 -v 
+    8  python3 -v 
+    9  apt install python3
+   10  apt install pip
+   11  history
+
+docker@minikube:~$ history
+    1  docker ps -a
+    2  docker commit hopeful_gauss
+    3  docker commit nervous_leavitt jenkins/inbound-agent-python
+    4  docker image
+    5  docker images
+    6  docker commit b29eae45bb8c jenkins/inbound-agent-python
+    7  docker commit f4218d91efda jenkins/inbound-agent-python
+    8  [200~docker images~
+    9  docker images
+   10  docker tag e28ebf34da4b jenkins/inbound-agent-python
+   11  docker pull jenkins/inbound-agent
+   12  docker ps a
+   13  docker ps -a
+   14  docker commit fd063cd3b151
+   15  docker images
+   16  docker tag e28ebf34da4b jenkins/inbound-agent-python
+   17  history
+
+analyst@analyst-virtual-machine:~$ history
+    1  sudo nano /etc/default/grub
+    2  sudo update-grub2
+    3  su
+    4  sudo apt update
+    5  history
+    6  ls
+    7  cd /media/analyst/
+    8  ls
+    9  cd 'VMware Tools'/
+   10  ls
+   11  cp VMwareTools-10.1.15-6627299.tar.gz ~/Downloads/
+   12  cd ~/Downloads/
+   13  ls
+   14  tar -xvf VMwareTools-10.1.15-6627299.tar.gz 
+   15  ls
+   16  cd vmware-tools-distrib/
+   17  ls
+   18  ./vmware-install.pl 
+   19  sudo ./vmware-install.pl 
+   20  history
+   21  minikube config set driver docker
+   22  minikube start --driver=docker
+   23  minikube kubectl -- get po -A
+   24  alias kubectl="minikube kubectl --"
+   25  minikube dashboard
+   26  kubectl create namespace devops-tools
+   27  sudo nano service-account.yaml
+   28  kubectl apply -f service-account.yaml
+   29  kubectl get sa -A
+   30  kubectl get serviceaccount
+   31  kubectl get role
+   32  kubectl get rolebinding
+   33  kubectl describe role
+   34  sudo nano persistentstorage.yaml
+   35  kubectl apply -f deployment.yaml
+   36  sudo nano persistentstorage.yaml
+   37  kubectl apply -f persistentstorage.yaml
+   38  kubectl get pv,pvc
+   39  sudo nano deployment.yaml
+   40  kubectl apply -f deployment.yaml
+   41  sudo nano deployment.yaml
+   42  kubectl apply -f deployment.yaml
+   43  sudo nano deployment.yaml
+   44  kubectl apply -f deployment.yaml
+   45  sudo nano deployment.yaml
+   46  kubectl apply -f deployment.yaml
+   47  sudo nano deployment.yaml
+   48  kubectl apply -f deployment.yaml
+   49  kubectl rollout status deployment jenkins-deployment
+   50  sudo nano service.yaml
+   51  kubectl apply -f service.yaml
+   52  kubectl get services
+   53  minikube ip
+   54  kubectl describe pod
+   55  kubectl logs jenkins-deployment-75787d68bf-sbqkl
+   56  docker pull jenkins/inbound-agent
+   57  docker run -u root -i -t jenkins/inbound-agent bash
+   58  history
