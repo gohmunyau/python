@@ -70,7 +70,7 @@ def main():
     if not disk_status or not cpu_status:
         print("ERROR! Disk usage or CPU utilization exceeded thresholds.")
     elif localhost_status and internet_status:
-        print("Everything is OK.")
+        print("EVERYTHING IS OK.")
     else:
         print("Network checks failed.")
 
